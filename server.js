@@ -1,16 +1,31 @@
-const express=require('express');
-const app=express();
-const connectDB=require('./config/db')
+const express = require("express");
+const cors = require("cors");
+const app = express();
+const connectDB = require("./config/db");
 connectDB();
 require("dotenv").config();
+//https://ecommerce-backend-rxl1.onrender.com
+app.use(
+    cors({
+        origin:"http://localhost:3000",
+        methods:["GET","POST","PUT","DELETE"],
+        credentials:true
+    })
+)
 
-const bodyparser=require('body-parser');
+app.use(express.json());
+
+const bodyparser = require("body-parser");
 app.use(bodyparser.json());
-const PORT=process.env.PORT||3000;
+const PORT = process.env.PORT || 5000;
 
-const userRoutes=require('./routes/userRoutes');
-app.use('/user',userRoutes);
+const userRoutes = require("./routes/userRoutes");
+const productRoutes = require("./routes/produuctRoutes");
+const eneqRoutes = require("./routes/eneqRoutes");
+app.use("/user", userRoutes);
+app.use("/products", productRoutes);
+app.use("/enqury", eneqRoutes);
 
-app.listen(PORT,()=>{
-    console.log(`Server is running on port`, PORT)
-})
+app.listen(PORT, () => {
+  console.log(`Server is running on port`, PORT);
+});
