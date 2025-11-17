@@ -7,7 +7,7 @@ require("dotenv").config();
 //https://ecommerce-backend-rxl1.onrender.com
 app.use(
     cors({
-        origin:"https://enquiry-app-tsii.onrender.com",
+        origin:"https://react-project-s25u.onrender.com",
         methods:["GET","POST","PUT","DELETE"],
         credentials:true
     })
